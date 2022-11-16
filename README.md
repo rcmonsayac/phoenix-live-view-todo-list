@@ -1,4 +1,6 @@
 # MyApp
+Demo:
+https://user-images.githubusercontent.com/35493715/202255605-baf032d1-de4f-4796-99ff-eb239b3382e6.mp4
 
 To start your Phoenix server:
 
@@ -10,6 +12,7 @@ To start your Phoenix server:
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+
 
 ## Learn more
 
