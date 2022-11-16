@@ -1,0 +1,43 @@
+
+<div class="box-content w-4/6 mx-auto p-4 flex flex-col ">
+  <h1 class="text-blue-500 text-4xl font-bold mb-8">To Do List Live View</h1>
+  <div class="">
+    <%= f = form_for @add_changeset, "#", [phx_submit: :add, phx_change: :validate] %>
+      <%= text_input f, :name, phx_debounce: 500, autocomplete: "off", class: "input-task", placeholder: "What do you want to get done?"%>
+      <%= submit "Add", phx_disable_with: "Adding...", class: "add-button" %>
+      <div class="input-task-validation">
+        <%= error_tag f, :name %>
+      </div>
+    </form>
+  
+    <%= if @live_action == :edit do %>
+      <%= live_modal @socket, MyAppWeb.FormComponent,
+        id: @task.id,
+        task: @task,
+        return_to: Routes.todo_path(@socket, :index) %>
+    <% end %>
+
+    <div phx-hook="SortableList" id="sortable-list">
+      <%= for task <- @tasks do %>
+        <div tabindex="0" draggable="true" class="task-item" data-sortable-id="<%= task.id %>" data-sort-order="<%= task.sort_order %>">
+          <%= checkbox(:task, :done, phx_click: "toggle_done", phx_value_id: task.id, value: task.done, class: "task-done") %>
+          <%= content_tag(:span, class: "task-name " <> (if task.done, do: "line-through", else: "") ) do %>
+            <%= task.name %> 
+          <% end %>
+          <div class="actions">
+            <%= content_tag(:button, phx_click: "delete_task", data: [confirm: "Are you sure?"], phx_value_id: task.id, class: "delete-btn" ) do %>
+              ✖
+            <% end %>
+            <%= content_tag(:button, phx_click: "edit_task", phx_value_id: task.id, class: "edit-btn" ) do %>
+              &#9998
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+

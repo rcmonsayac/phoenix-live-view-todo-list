@@ -1,0 +1,9 @@
+<div>
+  <%= f = form_for @edit_changeset, "#", class: "flex items-center justify-center h-full m-auto", phx_submit: :save, phx_target: @myself %>
+    <%= text_input f, :name, phx_debounce: 500, autocomplete: "off", class: "input-task", placeholder: "What do you want to get done?"%>
+    <%= submit "Save", phx_disable_with: "Saving...", class: "add-button" %>
+    <div class="input-task-validation">
+      <%= error_tag f, :name %>
+    </div>
+  </form>
+</div>

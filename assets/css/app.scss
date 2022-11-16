@@ -1,0 +1,175 @@
+/* This file is for your main application css. */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat, Roboto;
+}
+/* LiveView specific classes for your customizations */
+.phx-no-feedback.invalid-feedback,
+.phx-no-feedback .invalid-feedback {
+  display: none;
+}
+
+.phx-click-loading {
+  opacity: 0.5;
+  transition: opacity 1s ease-out;
+}
+
+.phx-disconnected{
+  cursor: wait;
+}
+.phx-disconnected *{
+  pointer-events: none;
+}
+
+.phx-modal {
+  opacity: 1!important;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.phx-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.phx-modal-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.phx-modal-close:hover,
+.phx-modal-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* Alerts and form errors */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.alert p {
+  margin-bottom: 0;
+}
+.alert:empty {
+  display: none;
+}
+.invalid-feedback {
+  color: #a94442;
+}
+
+@layer components {
+  .input-task {
+    @apply w-3/5 h-12 px-4 m-2 text-lg text-gray-700 placeholder-gray-500 placeholder-opacity-50 rounded-lg focus:outline-none shadow-inner focus:ring-2 focus:ring-blue-600;
+  }
+
+  .add-button {
+    @apply w-1/5 h-12 px-4 m-2 text-lg text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg hover:bg-blue-800
+  }
+
+  .input-task-validation {
+    @apply h-8;
+    span {
+      @apply h-8 pl-2;
+    }
+  }
+
+  .task-item {
+    @apply w-4/5 flex items-center px-4 m-2 min-h-full group p-2 text-black  cursor-pointer rounded-md outline-none;
+    .task-name {
+      @apply text-xl w-4/5 font-semibold;
+    }
+    .actions {
+      @apply hidden w-1/6 flex-row-reverse;
+    }
+
+    &:focus{
+      @apply bg-blue-300
+    }
+
+    &:focus-within {
+      @apply bg-blue-300
+    }
+
+    &:focus-within > .actions{
+      @apply flex;
+      .delete-btn {
+        @apply flex text-xl text-red-600 px-2 rounded-md;
+        &:hover {
+          @apply text-white bg-blue-600;
+        }
+      }
+      .edit-btn {
+        @apply flex text-xl text-blue-600 px-2 rounded-md;
+        &:hover {
+          @apply text-white bg-blue-600;
+        }
+      }
+    }
+    .task-done {
+      @apply ml-1 mr-2;
+    }
+
+
+  }
+  .dragged {
+    @apply bg-blue-300;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fade-in {
+    animation-name: fade-in;
+  }
+  
+  .animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+}
